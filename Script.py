@@ -4,7 +4,7 @@ from dash import Dash, dcc, html
 
 # GitHub Link : https://github.com/0-mazooon-0/No-show-Appointments-Dataset-Dashboard
 
-# === Load and preprocess data ===
+
 df = pd.read_csv(r"D:\DEPI\3- Preprocessing & Visualization\Dash project\modified.csv")
 
 # === Figure 1: Gender ===
@@ -101,6 +101,66 @@ fig8.update_layout(
     yaxis_title="Count",
 )
 
+# === Figure 9: Scholarship ===
+by_Scholarship = df.groupby('Scholarship')['No-show'].value_counts().reset_index().sort_values('Scholarship')
+fig9 = px.bar(by_Scholarship,x = 'Scholarship', y = 'count', facet_col = by_Scholarship['No-show'].apply(lambda x : "Attended" if x == 0 else "Didn't"))
+
+fig9.update_layout(
+    title = "Number of pepole attended/not grouped by Scholarship",
+    xaxis_title="Scholarship",
+    yaxis_title="Count",
+)
+
+# === Figure 10: Hipertension ===
+by_Hipertension = df.groupby('Hipertension')['No-show'].value_counts().reset_index().sort_values('Hipertension')
+fig10 = px.bar(by_Hipertension,x = 'Hipertension', y = 'count', facet_col = by_Hipertension['No-show'].apply(lambda x : "Attended" if x == 0 else "Didn't"))
+
+fig10.update_layout(
+    title = "Number of pepole attended/not grouped by Hipertension",
+    xaxis_title="Hipertension",
+    yaxis_title="Count",
+)
+
+# === Figure 11: Diabetes ===
+by_Diabetes = df.groupby('Diabetes')['No-show'].value_counts().reset_index().sort_values('Diabetes')
+fig11 = px.bar(by_Diabetes,x = 'Diabetes', y = 'count', facet_col = by_Diabetes['No-show'].apply(lambda x : "Attended" if x == 0 else "Didn't"))
+
+fig11.update_layout(
+    title = "Number of pepole attended/not grouped by Diabetes",
+    xaxis_title="Diabetes",
+    yaxis_title="Count",
+)
+
+# === Figure 12: Alcoholism ===
+by_Alcoholism = df.groupby('Alcoholism')['No-show'].value_counts().reset_index().sort_values('Alcoholism')
+fig12 = px.bar(by_Alcoholism, x = 'Alcoholism', y = 'count', facet_col = by_Alcoholism['No-show'].apply(lambda x : "Attended" if x == 0 else "Didn't"))
+
+fig12.update_layout(
+    title = "Number of pepole attended/not grouped by Alcoholism",
+    xaxis_title="Alcoholism",
+    yaxis_title="Count",
+)
+
+# === Figure 13: Handcap ===
+by_Handcap = df.groupby('Handcap')['No-show'].value_counts().reset_index().sort_values('Handcap')
+fig13 = px.bar(by_Handcap, x = 'Handcap', y = 'count', facet_col = by_Handcap['No-show'].apply(lambda x : "Attended" if x == 0 else "Didn't"))
+
+fig13.update_layout(
+    title = "Number of pepole attended/not grouped by Handcap",
+    xaxis_title="Handcap",
+    yaxis_title="Count",
+)
+
+
+# === Figure 14: SMS_received ===
+by_SMS_received = df.groupby('SMS_received')['No-show'].value_counts().reset_index().sort_values('SMS_received')
+fig14 = px.bar(by_SMS_received, x = 'SMS_received', y = 'count', facet_col = by_SMS_received['No-show'].apply(lambda x : "Attended" if x == 0 else "Didn't"))
+
+fig14.update_layout(
+    title = "Number of pepole attended/not grouped by SMS_received",
+    xaxis_title="SMS_received",
+    yaxis_title="Count",
+)
 
 # === Build Dash App ===
 app = Dash(__name__)
@@ -133,6 +193,12 @@ app.layout = html.Div([
     html.H2("Observation: " 
     "As we can see difference affects attendance and absecne. Where the more the difference in days is bigger the less people show-up in appointmnets"
     ),
+    dcc.Graph(figure=fig9),
+    dcc.Graph(figure=fig10),
+    dcc.Graph(figure=fig11),
+    dcc.Graph(figure=fig12),
+    dcc.Graph(figure=fig13),
+    dcc.Graph(figure=fig14)
 ])
 
 if __name__ == '__main__':
