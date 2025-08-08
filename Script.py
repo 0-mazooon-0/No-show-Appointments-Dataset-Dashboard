@@ -2,6 +2,8 @@ import pandas as pd
 import plotly.express as px
 from dash import Dash, dcc, html
 
+# GitHub Link : https://github.com/0-mazooon-0/No-show-Appointments-Dataset-Dashboard
+
 # === Load and preprocess data ===
 df = pd.read_csv(r"D:\DEPI\3- Preprocessing & Visualization\Dash project\modified.csv")
 
@@ -106,11 +108,8 @@ app = Dash(__name__)
 app.layout = html.Div([
     html.H1("No-show Appointments Dashboard", style={'textAlign': 'center'}),
     dcc.Graph(figure=fig1),
-    html.H2("Observations: " 
-    "As we can see the total number females in general is bigger but the number of males attended out of total is bigger that that of females"
-    ),
     dcc.Graph(figure=fig2),
-        html.H2("Observations: " 
+    html.H2("Observations: " 
     "As we can see people barely scheduled appointments on January and Feburary. Also people on March and June barely missed appointments "
     ),
     dcc.Graph(figure=fig3),
